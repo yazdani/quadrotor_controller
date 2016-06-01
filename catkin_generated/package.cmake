@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "quadrotor_controller")
+set(quadrotor_controller_MAINTAINER "yazdani <yazdani@todo.todo>")
+set(quadrotor_controller_DEPRECATED "")
+set(quadrotor_controller_VERSION "0.0.0")
+set(quadrotor_controller_BUILD_DEPENDS "actionlib" "actionlib_msgs" "geometry_msgs" "message_generation" "roscpp" "std_msgs")
+set(quadrotor_controller_RUN_DEPENDS "actionlib" "actionlib_msgs" "geometry_msgs" "message_runtime" "roscpp" "std_msgs")
+set(quadrotor_controller_BUILDTOOL_DEPENDS "catkin")

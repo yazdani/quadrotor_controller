@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/yazdani/work/ros/indigo/catkin_ws/src/quadrotor_controller/devel/setup.sh

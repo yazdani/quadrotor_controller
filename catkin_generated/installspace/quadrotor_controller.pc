@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: quadrotor_controller
+Description: Description of quadrotor_controller
+Version: 0.0.0
+Cflags: -I/usr/local/include
+Libs: -L/usr/local/lib 
+Requires: actionlib actionlib_msgs geometry_msgs roscpp std_msgs

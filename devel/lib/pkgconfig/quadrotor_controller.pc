@@ -1,0 +1,8 @@
+prefix=/home/yazdani/work/ros/indigo/catkin_ws/src/quadrotor_controller/devel
+
+Name: quadrotor_controller
+Description: Description of quadrotor_controller
+Version: 0.0.0
+Cflags: -I/home/yazdani/work/ros/indigo/catkin_ws/src/quadrotor_controller/devel/include
+Libs: -L/home/yazdani/work/ros/indigo/catkin_ws/src/quadrotor_controller/devel/lib 
+Requires: actionlib actionlib_msgs geometry_msgs roscpp std_msgs
