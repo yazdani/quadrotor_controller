@@ -14,7 +14,12 @@
 #include <stdio.h> 
 #include <math.h>
 
-ros::NodeHandle n;
+
+
+
+bool execute(quadrotor_controller::cmd_srv::Request &req,
+         quadrotor_controller::cmd_srv::Response &res)
+{
 ros::NodeHandle nh;
 ros::NodeHandle nh_;
 ros::ServiceClient gms_c;  
@@ -24,11 +29,7 @@ ros::Publisher publisher;
 ros::ServiceClient smsl;
 geometry_msgs::Pose end_pose;
 geometry_msgs::Twist end_twist;
-
-bool execute(quadrotor_controller::cmd_srv::Request &req,
-         quadrotor_controller::cmd_srv::Response &res)
-{
-  ROS_INFO("IS EXECUTTED");
+  ROS_INFO("IS EXECUTED");
   publisher = nh.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
    gms_c = nh_.serviceClient<gazebo_msgs::GetModelState>("/gazebo/get_model_state");
    getmodelstate.request.model_name="quadrotor";
@@ -53,8 +54,8 @@ bool execute(quadrotor_controller::cmd_srv::Request &req,
        
        
     ROS_INFO(" Come Up Hector! ");
-   
-    if(now_z < new_z)
+
+ if(now_z < new_z)
       {
 	while(now_z < new_z)
 	  {
@@ -69,28 +70,28 @@ bool execute(quadrotor_controller::cmd_srv::Request &req,
 	tw.linear.x = 0;
 	tw.linear.y = 0;
 	publisher.publish(tw);
-	std::cout << "haha2" << std::endl;
-      }else if(now_z > new_z)
-      {
-	while(now_z > new_z)
-	  {
-	    std::cout << "hahaww" << std::endl;
-	    tw.linear.z = -0.2;
-	    publisher.publish(tw);
-	    ros::Duration(1.0).sleep();
-	    gms_c.call(getmodelstate);
-	    now_z =  getmodelstate.response.pose.position.z;
-	  }
+      }// else if(now_z > new_z)
+      // {
+      // 	while(now_z > new_z)
+      // 	  {
+      // 	    std::cout << "hahaww" << std::endl;
+      // 	    tw.linear.z = -0.2;
+      // 	    publisher.publish(tw);
+      // 	    ros::Duration(1.0).sleep();
+      // 	    gms_c.call(getmodelstate);
+      // 	    now_z =  getmodelstate.response.pose.position.z;
+      // 	  }
 	
-	ros::Duration(1.0).sleep();
-	tw.linear.z = 0;
-	tw.linear.x = 0;
-	tw.linear.y = 0;
-	publisher.publish(tw);
-      }
-    if(now_x < new_x)
+      // 	ros::Duration(1.0).sleep();
+      // 	tw.linear.z = 0;
+      // 	tw.linear.x = 0;
+      // 	tw.linear.y = 0;
+      // 	publisher.publish(tw);
+      // }
+
+ if(now_x < new_x)
       {
-	
+	  ROS_INFO(" Move Hector! ");
 	while(now_x < new_x)
 	  {
 	    tw.linear.x = 0.2;
@@ -156,6 +157,9 @@ bool execute(quadrotor_controller::cmd_srv::Request &req,
 	tw.linear.y = 0;
 	publisher.publish(tw); 
       }
+  ROS_INFO(" Move down! ");
+
+
   std::cout << "Well it worked" << std::endl;
   return true;
 }
@@ -163,7 +167,7 @@ bool execute(quadrotor_controller::cmd_srv::Request &req,
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "execute_instruction_server");
-
+ros::NodeHandle n;
   ros::ServiceServer service = n.advertiseService("setPoseToVel", execute);
   ROS_INFO("Ready to receive information where to fly");
   ros::spin();
